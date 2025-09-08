@@ -16,7 +16,7 @@ export default function Home() {
         <CardFooter className="flex justify-center">
           <Button asChild>
             <a
-              href="https://github.com/your-username/your-repo"
+              href="https://github.com/aditydcp"
               target="_blank"
               rel="noopener noreferrer"
             >

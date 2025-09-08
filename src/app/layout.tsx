@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Quicksand, Merriweather, Fira_Code } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/feature/theme-toggle";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -10,7 +12,7 @@ const quicksand = Quicksand({
 const merriweather = Merriweather({
   subsets: ["latin"],
   variable: "--font-serif",
-  weight: ["400", "700"], // optional, pick weights you need
+  weight: ["400", "700"],
 });
 
 const firaCode = Fira_Code({
@@ -33,7 +35,15 @@ export default function RootLayout({
       <body
         className={`${quicksand.variable} ${merriweather.variable} ${firaCode.variable} antialiased bg-background text-foreground`}
       >
-        {children}
+        <ThemeProvider>
+          {/* Header */}
+          <header className="flex items-center justify-end p-4 border-b">
+            <ThemeToggle />
+          </header>
+
+          {/* Main content */}
+          <main className="p-6">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
