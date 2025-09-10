@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";
 
 interface ToggleButtonProps {
@@ -8,7 +9,8 @@ interface ToggleButtonProps {
   offIcon: ReactNode;
   defaultOn?: boolean;
   onToggle?: (isOn: boolean) => void;
-  label?: string; // for accessibility
+  label?: string;
+  className?: string;
 }
 
 export function ToggleButton({
@@ -17,6 +19,7 @@ export function ToggleButton({
   defaultOn = false,
   onToggle,
   label = "Toggle",
+  className,
 }: ToggleButtonProps) {
   const [isOn, setIsOn] = useState(defaultOn);
 
@@ -32,6 +35,7 @@ export function ToggleButton({
       size="icon"
       onClick={handleClick}
       aria-label={label}
+      className={cn(className)}
     >
       {isOn ? onIcon : offIcon}
       <span className="sr-only">{label}</span>

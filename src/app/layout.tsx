@@ -36,12 +36,7 @@ export default function RootLayout({
         className={`${quicksand.variable} ${merriweather.variable} ${firaCode.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
-          {/* Header */}
-          <header className="flex items-center justify-end p-4 border-b">
-            <ThemeToggle />
-          </header>
-
-          {/* Main content */}
+          <ThemeToggle />
           <main className="p-6">{children}</main>
         </ThemeProvider>
       </body>
