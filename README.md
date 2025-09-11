@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💰 Money Ledger
 
-## Getting Started
+Money Ledger is a modern **finance tracker app** built with [Next.js](https://nextjs.org), designed to help you stay on top of your expenses and income in a clean, fast, and delightful way.
 
-First, run the development server:
+It comes with:
+
+- ⚡ **Next.js (App Router)** – optimized React framework for web apps.
+- 🎨 **shadcn/ui** – beautifully styled, accessible UI components.
+- 🐳 **Docker & Docker Compose** – ready for local development with hot reload and production deployments.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- [Node.js 20+](https://nodejs.org/)
+- [Docker](https://www.docker.com/) (optional, but recommended)
+
+### Local Development (without Docker)
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🐳 Running with Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+We ship both production and development (hot-reload) setups.
 
-## Learn More
+### Development (hot reload)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker-compose up --build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+➡️ Mounts your local files into the container and reloads on changes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Production
 
-## Deploy on Vercel
+```bash
+docker-compose -f docker-compose.yml up --build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+➡️ Uses the optimized Next.js build for production.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Project Structure
+
+```bash
+.
+├── app/                # Next.js App Router pages & routes
+├── components/
+│   ├── ui/             # shadcn/ui components
+│   └── shared/         # reusable components (e.g., ThemeToggle)
+├── lib/                # utilities (e.g., class merging, helpers)
+├── public/             # static assets
+├── Dockerfile          # Production Dockerfile
+├── Dockerfile.dev      # Development Dockerfile with hot reload
+├── docker-compose.yml  # Base config
+└── docker-compose.override.yml  # Dev overrides
+```
+
+## ✨ Features
+
+-	Track income and expenses easily.
+-	Dark/light mode.
+-	Modern, reusable UI with shadcn components.
+-	Developer-friendly setup with Docker Compose hot-reload.
+
+## 📖 Learn More
+
+- [Next.js documentation](https://nextjs.org/docs)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Docker Docs](https://docs.docker.com/)
+
+## 🚀 Deployment
+
+The recommended way to deploy is via **Docker** or **Vercel**:
+-	Vercel – easiest, managed hosting for Next.js.
+-	Docker – consistent deployments anywhere.
+
+## 📝 License
+
+This project is licensed under the MIT License.
