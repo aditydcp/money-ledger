@@ -11,7 +11,7 @@ export default function Home() {
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center text-muted-foreground">
-          This page is under construction. Stay tuned!
+          We will be watching for your pennies soon!
         </CardContent>
         <CardFooter className="flex justify-center">
           <Button asChild>
