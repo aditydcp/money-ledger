@@ -10,6 +10,12 @@ services:
         condition: service_healthy   # <-- wait for Postgres health
     ports:
       - "${WEB_PORT}:${WEB_PORT_INTERNAL}"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${WEB_PORT_INTERNAL}/api/health"]  # <-- health endpoint
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s   # give Next.js some extra boot time
 
   db:
     image: postgres:16
