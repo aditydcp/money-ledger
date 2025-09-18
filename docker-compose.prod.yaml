@@ -12,7 +12,7 @@ services:
     container_name: moneyledger-db-prod
     restart: unless-stopped
     volumes:
-      - ${PGDATA_PROD}:/var/lib/postgresql/data
+      - moneyledger_pgdata_prod:/var/lib/postgresql/data
 
 volumes:
-  ${PGDATA_PROD}:
+  moneyledger_pgdata_prod:

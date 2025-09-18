@@ -14,7 +14,7 @@ services:
   db:
     container_name: moneyledger-db-dev
     volumes:
-      - ${PGDATA_DEV}:/var/lib/postgresql/data
+      - moneyledger_pgdata_dev:/var/lib/postgresql/data
 
 volumes:
-  ${PGDATA_DEV}:
+  moneyledger_pgdata_dev:
