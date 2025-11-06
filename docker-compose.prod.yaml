@@ -1,0 +1,17 @@
+services:
+  web:
+    container_name: moneyledger-web-prod
+    build:
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+
+  db:
+    container_name: moneyledger-db-prod
+    restart: unless-stopped
+    volumes:
+      - moneyledger_pgdata_prod:/var/lib/postgresql/data
+
+volumes:
+  moneyledger_pgdata_prod:

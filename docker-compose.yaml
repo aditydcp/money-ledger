@@ -1,12 +1,23 @@
-version: "3.9"
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: nextjs-prod
-    ports:
-      - "3000:3000"
     environment:
-      NODE_ENV: production
-    restart: unless-stopped
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:${DB_PORT_INTERNAL}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s   # give Postgres some extra boot time
+
+volumes:
+  pgdata:
