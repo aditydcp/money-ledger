@@ -1,30 +1,17 @@
-version: "3.9"
 services:
   web:
     build:
       context: .
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-    depends_on:
-      db:
-        condition: service_healthy   # <-- wait for Postgres health
-    ports:
-      - "${WEB_PORT}:${WEB_PORT_INTERNAL}"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${WEB_PORT_INTERNAL}/api/health"]  # <-- health endpoint
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 20s   # give Next.js some extra boot time
-
-  db:
-    image: postgres:16
+      dockerfile: Dockerfile
+    container_name: nextjs-prod
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:${DB_PORT_INTERNAL}"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
