@@ -3,7 +3,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install dependencies for sharp (image optimization)
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat openssl curl
 
 # Install dependencies
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
@@ -16,6 +16,9 @@ RUN \
 
 # Copy everything (but node_modules is excluded via volumes in compose)
 COPY . .
+
+# Ensure prisma and client are generated in the same layer
+RUN npx prisma generate || (npm install prisma @prisma/client && npx prisma generate)
 
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
