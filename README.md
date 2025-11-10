@@ -27,7 +27,7 @@ Then open http://localhost:3000.
 
 ## 🐳 Running with Docker
 
-We ship both production and development (hot-reload) setups.
+We ship both production and development (hot-reload) setups. First of all, please create a copy of `.env.example` and name it `.env` and populate the variables with the appropriate value for your environment. Do the same and name it `.env.prod` for production
 
 ### Development (hot reload)
 
@@ -40,25 +40,34 @@ docker-compose up --build
 ### Production
 
 ```bash
-docker-compose -f docker-compose.yml up --build
+docker-compose --env-file .env.prod -f docker-compose.yaml -f docker-compose.prod.yaml up -d
 ```
 
 ➡️ Uses the optimized Next.js build for production.
+
+### Pro tip
+
+The default settings (_using `.env` and `docker-compose.yaml` (which will be overriden by `docker-compose.override.yaml`) (with the exception of `Dockerfile.dev`)_) will be treated as `development` environment. As such, for production you can make it's own `.env` file under the name `.env.prod`. If you wish to use the same environment values, then you can just go ahead and use this command for production.
+
+```bash
+docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
+```
 
 ## 📂 Project Structure
 
 ```bash
 .
-├── app/                # Next.js App Router pages & routes
+├── app/                          # Next.js App Router pages & routes
 ├── components/
-│   ├── ui/             # shadcn/ui components
-│   └── shared/         # reusable components (e.g., ThemeToggle)
-├── lib/                # utilities (e.g., class merging, helpers)
-├── public/             # static assets
-├── Dockerfile          # Production Dockerfile
-├── Dockerfile.dev      # Development Dockerfile with hot reload
-├── docker-compose.yml  # Base config
-└── docker-compose.override.yml  # Dev overrides
+│   ├── ui/                       # shadcn/ui components
+│   └── shared/                   # reusable components (e.g., ThemeToggle)
+├── lib/                          # utilities (e.g., class merging, helpers)
+├── public/                       # static assets
+├── Dockerfile                    # Production Dockerfile
+├── Dockerfile.dev                # Development Dockerfile with hot reload
+├── docker-compose.yml            # Base config
+├── docker-compose.override.yml   # Dev overrides
+└── docker-compose.prod.yml       # Prod overrides
 ```
 
 ## ✨ Features

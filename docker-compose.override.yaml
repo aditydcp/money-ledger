@@ -1,12 +1,19 @@
 services:
   web:
+    container_name: moneyledger-web-dev
     build:
-      context: .
       dockerfile: Dockerfile.dev
-    container_name: nextjs-dev
     volumes:
       - .:/app
       - /app/node_modules
     environment:
       NODE_ENV: development
-    command: npm run dev
+    command: sh -c "npx prisma generate && npx prisma migrate dev && npm run dev"
+
+  db:
+    container_name: moneyledger-db-dev
+    volumes:
+      - moneyledger_pgdata_dev:/var/lib/postgresql/data
+
+volumes:
+  moneyledger_pgdata_dev:

@@ -3,6 +3,7 @@ import { Quicksand, Merriweather, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/feature/theme-toggle";
+import NextAuthProvider from "@/providers/ServerProvider";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -35,10 +36,12 @@ export default function RootLayout({
       <body
         className={`${quicksand.variable} ${merriweather.variable} ${firaCode.variable} antialiased bg-background text-foreground`}
       >
-        <ThemeProvider>
-          <ThemeToggle />
-          <main className="p-6">{children}</main>
-        </ThemeProvider>
+        <NextAuthProvider>
+          <ThemeProvider>
+            <ThemeToggle />
+            <main className="p-6">{children}</main>
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
