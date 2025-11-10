@@ -1,0 +1,9 @@
+{
+  "name":"Money Ledger",
+  "description": "A personal finance ledger application.",
+  "status_working": "Active",
+  "author": "aditydcp",
+  "type": "Web Application",
+  "language": "TypeScript",
+  "framework": "Next.js"
+}
